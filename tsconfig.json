@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",       // Cartella di output per i file JavaScript
+    "rootDir": "./src",        // Cartella sorgente dei file TypeScript
+    "module": "commonjs",
+    "target": "es6",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*"],     // Includi tutti i file nella cartella src
+  "exclude": ["node_modules"]  // Escludi la cartella node_modules
+}
