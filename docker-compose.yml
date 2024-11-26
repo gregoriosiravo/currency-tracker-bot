@@ -6,14 +6,14 @@ services:
       dockerfile: Dockerfile
     container_name: currency-tracker-app
     ports:
-      - "3000:3000" # Porta locale : Porta del contenitore
+      - "3000:3000" 
     environment:
-      - MONGODB_URI=mongodb://mongodb:27017/telegramBot # Collega Node.js a MongoDB
+      - MONGODB_URI=mongodb://mongodb:27017/telegramBot 
     depends_on:
       - mongodb
     volumes:
-      - .:/app # Monta il codice sorgente per lo sviluppo
-      - /app/node_modules # Evita conflitti dei moduli
+      - .:/app 
+      - /app/node_modules 
 
   mongodb:
     image: mongo
