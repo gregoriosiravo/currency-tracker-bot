@@ -5,19 +5,15 @@ import { callbackQueryHandler } from "./handlers/callbackQueryHandler";
 import dotenv from "dotenv";
 
 dotenv.config();
+export const startBot = () => {
+  const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN || "", {
+    polling: true,
+  });
 
-const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN || "", {
-  polling: true,
-});
+  // Register commands
+  startCommand(bot);
+  optionCommand(bot);
 
-// Register commands
-startCommand(bot);
-optionCommand(bot);
-
-// Register handlers
-callbackQueryHandler(bot);
-
-console.log("✅ Bot is running...");
-
-
-export default bot;
+  // Register handlers
+  callbackQueryHandler(bot);
+};

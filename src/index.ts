@@ -1,10 +1,24 @@
-import dotenv from 'dotenv';
-import { connectDB } from './db';
+import dotenv from "dotenv";
+import { connectDB } from "./db";
+import { startBot } from "./bot/bot";
 
 dotenv.config();
 
 const startApp = async () => {
-  await connectDB();
+  try {
+    await connectDB();
+
+    console.log("#################  Database connected ####################");
+
+    startBot();
+    console.log("✅Bot Started");
+  } catch (error) {
+    console.error(
+      "❌ Errore nell'avvio del bot o nella connessione al database:",
+      error
+    );
+    process.exit(1); // Termina l'app se la connessione fallisce
+  }
 };
 
-startApp().then(() => console.log('Bot avviato'));
+startApp();
