@@ -7,6 +7,8 @@ interface ITrackedCurrency {
 
 export interface IUser extends Document {
   chatId: string;
+  currency: string;
+  goal: number;
   trackedCurrencies: ITrackedCurrency[];
 }
 

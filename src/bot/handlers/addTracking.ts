@@ -1,28 +1,43 @@
-import TelegramBot, { Message } from 'node-telegram-bot-api';
-import { User } from '../../models/User';
+import TelegramBot, { Message } from "node-telegram-bot-api";
+import { User } from "../../models/User";
 
-export const addTrackingHandler = (bot: TelegramBot) => {
-  bot.onText(/\/add (.+)/, async (msg: Message, match: RegExpExecArray | null) => {
-    const chatId = msg.chat.id.toString();
-    const [currency, goal] = match ? match[1].split(' ') : [];
-
-    if (!currency || isNaN(Number(goal))) {
-      bot.sendMessage(chatId, 'Usage: /add <currency> <goal>');
-      return;
-    }
-
-    try {
-      const user = await User.findOneAndUpdate(
-        { chatId },
-        {
-          $addToSet: { trackedCurrencies: { currency: currency.toUpperCase(), goal: parseFloat(goal) } },
+export const addTrackingHandler = async (bot: TelegramBot) => {
+  bot.on("callback_query", async (query) => {
+    const chatId = query.message?.chat.id.toString();
+    const data = query.data;
+  
+    if (!chatId || !data) return;
+  
+    if (data === "add_tracking") {
+      // Quando preme "Add Tracking", mostra tastiera delle valute
+      const inlineKeyboard = {
+        reply_markup: {
+          inline_keyboard: [
+            [
+              { text: "USD 🇺🇸", callback_data: "currency_USD" },
+              { text: "EUR 🇪🇺", callback_data: "currency_EUR" },
+            ],
+            [
+              { text: "JPY 🇯🇵", callback_data: "currency_JPY" },
+              { text: "CNY 🇨🇳", callback_data: "currency_CNY" },
+            ],
+            [
+              { text: "GBP 🇬🇧", callback_data: "currency_GBP" },
+              { text: "AUD 🇦🇺", callback_data: "currency_AUD" },
+            ],
+          ],
         },
-        { upsert: true, new: true }
-      );
-
-      bot.sendMessage(chatId, `Tracking added: ${currency.toUpperCase()} with goal BRL ${goal}`);
-    } catch (error) {
-      bot.sendMessage(chatId, 'Error while adding tracking.');
+      };
+  
+      bot.sendMessage(chatId, "Choose a Currency:", inlineKeyboard);
     }
-  });
+  
+    if (data.startsWith("currency_")) {
+      // Quando preme una valuta
+      const currency = data.split("_")[1]; // Esempio: USD
+      bot.sendMessage(chatId, `Great, you chose: ${currency}!`);
+    }
+  
+    await bot.answerCallbackQuery(query.id);
+  });  
 };

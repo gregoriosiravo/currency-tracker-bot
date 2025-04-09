@@ -1,16 +1,22 @@
 FROM node:18
 
+# Set working directory inside container
 WORKDIR /app
 
+# Copy package.json and package-lock.json (if present)
 COPY package*.json ./
 
+# Install dependencies
 RUN npm install
 
+# Copy all project files
 COPY . .
 
-RUN npm run build
+# Copy .env for environment variables
+COPY .env .env
 
-
+# Expose the port the app will run on
 EXPOSE 3000
 
-CMD ["node", "dist/index.js"]
+# Start the app
+CMD ["npm", "run", "dev"]
