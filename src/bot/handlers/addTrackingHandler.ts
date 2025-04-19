@@ -6,7 +6,6 @@ export const addTrackingHandler = (
   chatId: string,
   bot: TelegramBot
 ) => {
-  // Log che l'utente sta iniziando il tracciamento della valuta
   console.log(
     `💬 L'utente con chatId: ${chatId} sta ora tracciando la valuta: ${currency}`
   );
@@ -22,7 +21,6 @@ export const addTrackingHandler = (
 
     const goal = parseFloat(text);
 
-    // Format the number to always show two decimal places
     const formattedGoal = goal.toFixed(2);
 
     console.log("this is goal: ", goal);
@@ -32,7 +30,6 @@ export const addTrackingHandler = (
       return;
     }
 
-    // Aggiungi o aggiorna l'utente con la valuta e il goal
     try {
       await createOrUpdateUser(chatId, currency, goal);
       bot.sendMessage(chatId, `✅ Goal set for ${currency} to BRL ${goal}`);
