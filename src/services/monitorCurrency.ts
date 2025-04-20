@@ -1,4 +1,3 @@
-import axios from 'axios';
 import TelegramBot from 'node-telegram-bot-api';
 import { User } from '../models/User';
 import { getCurrencyRate } from './currencyService';
@@ -17,7 +16,7 @@ export const monitorCurrencyRates = async (bot: TelegramBot) => {
         if (currentRate < goal) {
           bot.sendMessage(
             user.chatId,
-            `⚠️ Attenzione! Il tasso di cambio di ${currency} è sceso sotto la tua soglia di ${goal}. Attuale tasso: ${currentRate}`
+            `⚠️⚠️⚠️⚠️⚠️ Atenção! A taxa de câmbio de ${currency} caiu abaixo da sua meta de ${goal}. Taxa atual: ${currentRate}. ⚠️⚠️⚠️⚠️⚠️`
           );
         }
       }

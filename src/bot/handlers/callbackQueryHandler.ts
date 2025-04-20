@@ -13,7 +13,7 @@ export const callbackQueryHandler = (bot: TelegramBot) => {
     if (!chatId || !data) return;
 
     if (data === "add_tracking") {
-      bot.sendMessage(chatId, "Choose a currency:", currencyKeyboard);
+      bot.sendMessage(chatId, "Escolha uma moeda:", currencyKeyboard);
     } else if (data.startsWith("currency_")) {
       const currency = data.split("_")[1];
       addTrackingHandler(currency, chatId, bot);

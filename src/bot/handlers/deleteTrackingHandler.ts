@@ -5,7 +5,7 @@ export const deleteTrackingHandler = async (chatId: string, bot: TelegramBot) =>
   const user = await getUser(chatId);
 
   if (!user || user.trackedCurrencies.length === 0) {
-    await bot.sendMessage(chatId, "⚠️ You have no tracked currencies to delete.");
+    await bot.sendMessage(chatId, "⚠️ Você não tem moedas registradas para excluir.");
     return;
   }
 
@@ -16,7 +16,7 @@ export const deleteTrackingHandler = async (chatId: string, bot: TelegramBot) =>
     },
   ]);
 
-  await bot.sendMessage(chatId, "Select a currency to delete:", {
+  await bot.sendMessage(chatId, "Selecione uma moeda para excluir:", {
     reply_markup: {
       inline_keyboard: inlineKeyboard,
     },
@@ -29,5 +29,5 @@ export const handleCurrencyDeletion = async (
   bot: TelegramBot
 ) => {
   await removeTrackedCurrency(chatId, currency);
-  await bot.sendMessage(chatId, `✅ ${currency.toUpperCase()} has been removed from your trackings.`);
+  await bot.sendMessage(chatId, `✅ ${currency.toUpperCase()} foi removida dos seus registros.`);
 };

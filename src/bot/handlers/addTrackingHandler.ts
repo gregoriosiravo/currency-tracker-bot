@@ -12,7 +12,7 @@ export const addTrackingHandler = (
 
   bot.sendMessage(
     chatId,
-    `You chose ${currency}. Now, please choose your goal.`
+    `Você escolheu ${currency}. Agora, por favor, escolha sua meta.`
   );
 
   bot.once("text", async (msg: Message) => {
@@ -26,18 +26,18 @@ export const addTrackingHandler = (
     console.log("this is goal: ", goal);
 
     if (isNaN(goal)) {
-      bot.sendMessage(chatId, "Invalid goal. Please send a valid number.");
+      bot.sendMessage(chatId, "Meta inválida. Por favor, envie um número válido.");
       return;
     }
 
     try {
       await createOrUpdateUser(chatId, currency, goal);
-      bot.sendMessage(chatId, `✅ Goal set for ${currency} to BRL ${goal}`);
+      bot.sendMessage(chatId, `✅ Meta definida para ${currency} em BRL ${goal}`);
     } catch (error) {
       console.error("❌ Error while updating user goal:", error);
       bot.sendMessage(
         chatId,
-        "❌ Something went wrong while setting the goal."
+        "❌ Algo deu errado ao definir a meta. Tente de novo"
       );
     }
   });

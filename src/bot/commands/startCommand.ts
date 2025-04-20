@@ -3,6 +3,6 @@ import { mainMenuKeyboard } from "../keyboards/mainMenuKeyboard";
 
 export const startCommand = (bot: TelegramBot) => {
   bot.onText(/\/start/, (msg) => {
-    bot.sendMessage(msg.chat.id, "Welcome to Currency Tracker Bot! 👋", mainMenuKeyboard);
+    bot.sendMessage(msg.chat.id, "Ben-vindo ao Bot Currency Tracker! 👋", mainMenuKeyboard);
   });
 };

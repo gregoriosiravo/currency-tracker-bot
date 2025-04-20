@@ -6,7 +6,7 @@ export const updateGoalHandler = async (chatId: string, bot: TelegramBot) => {
   const user = await getUser(chatId);
 
   if (!user || user.trackedCurrencies.length === 0) {
-    await bot.sendMessage(chatId, "⚠️ You have no tracked currencies to update.");
+    await bot.sendMessage(chatId, "⚠️ Você não tem moedas registradas para atualizar.");
     return;
   }
 
@@ -17,7 +17,7 @@ export const updateGoalHandler = async (chatId: string, bot: TelegramBot) => {
     },
   ]);
 
-  await bot.sendMessage(chatId, "Select a currency to update the goal:", {
+  await bot.sendMessage(chatId, "Selecione uma moeda para atualizar o objetivo:", {
     reply_markup: {
       inline_keyboard: inlineKeyboard,
     },
@@ -33,7 +33,7 @@ export const handleCurrencyToUpdate = async (
   bot: TelegramBot
 ) => {
   waitingForGoalUpdate.set(chatId, currency);
-  await bot.sendMessage(chatId, `📥 Send the new goal for *${currency.toUpperCase()}*`, {
+  await bot.sendMessage(chatId, `📥 Envie o novo objetivo para *${currency.toUpperCase()}*`, {
     parse_mode: "Markdown",
   });
 };
@@ -49,14 +49,14 @@ export const handleGoalInput = async (chatId: string, text: string, bot: Telegra
 
   const newGoal = parseFloat(text);
   if (isNaN(newGoal)) {
-    await bot.sendMessage(chatId, "❌ Please send a valid number.");
+    await bot.sendMessage(chatId, "❌ Por favor, envie um número válido.");
     return;
   }
 
   await updateTrackedCurrencyGoal(chatId, currency, newGoal);
   waitingForGoalUpdate.delete(chatId);
 
-  await bot.sendMessage(chatId, `✅ Goal for *${currency.toUpperCase()}* updated to *${newGoal}*`, {
+  await bot.sendMessage(chatId, `✅ Objetivo para ${currency.toUpperCase()} atualizado para ${newGoal}.`, {
     parse_mode: "Markdown",
   });
 };

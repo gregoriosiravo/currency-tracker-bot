@@ -5,7 +5,7 @@ export const listTrackingHandler = async (chatId: string, bot: TelegramBot) => {
   const user = await getUser(chatId);
 
   if (!user || user.trackedCurrencies.length === 0) {
-    await bot.sendMessage(chatId, "⚠️ You have no tracked currencies.");
+    await bot.sendMessage(chatId, "⚠️  Você não tem moedas registradas!");
     return;
   }
 
@@ -13,7 +13,7 @@ export const listTrackingHandler = async (chatId: string, bot: TelegramBot) => {
     .map((tc) => `💱 *${tc.currency.toUpperCase()}* - 🎯 Goal: ${tc.goal}`)
     .join("\n");
 
-  await bot.sendMessage(chatId, `📊 Your tracked currencies:\n\n${message}`, {
+  await bot.sendMessage(chatId, `📊 Suas moedas registradas:\n\n${message}`, {
     parse_mode: "Markdown",
   });
 };
