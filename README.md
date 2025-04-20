@@ -2,14 +2,11 @@
 
 A feature-rich bot built with Node.js and TypeScript, designed to handle tasks like notifications, automation, and integrations. This bot is highly customizable and can be easily extended to suit your specific needs.
 
-AT THE MOMENT THE BOT TRACK EVERY CURRENCY TO BRL ( BRAZILIAN REAL )
+Currently, the bot tracks a list of currencies against the BRL (Brazilian Real) and checks their values every 10 minutes, sending a notification if the exchange rate reaches the goal you set.
 
 ## Features
 
-
-## Features
-
-- **Track Currency Goals**: Add, update, or delete currency tracking goals.
+- **Track Currency Goals**: Add, update, show list, delete currency tracking goals.
 - **Notifications**: Get notified when a currency reaches a defined goal.
 - **TypeScript Support**: Ensures robust and maintainable code.
 - **Database Integration**: Stores user data and tracking configurations.
@@ -30,7 +27,7 @@ AT THE MOMENT THE BOT TRACK EVERY CURRENCY TO BRL ( BRAZILIAN REAL )
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/sirap95/currency-tracker-bot.git
+   git clone https://github.com/gregoriosiravo/currency-tracker-bot.git
    cd currency-tracker-bot
    npm install
    cp .env.example .env
@@ -41,3 +38,21 @@ AT THE MOMENT THE BOT TRACK EVERY CURRENCY TO BRL ( BRAZILIAN REAL )
    ```bash
     docker-compose up --build
     ```
+## Deploy 
+1. Clone the repository to your server:
+   ```bash
+   git clone https://github.com/gregoriosiravo/currency-tracker-bot.git
+   ```
+2. use Dockerfile.prod:
+   ```bash
+   rm -r Dockerfile
+   cp Dockerfile.prod Dockerfile
+   ```
+3. add .env and bot infos:
+   ```bash
+   cp .env.example .env
+   ```
+4. run docker:
+   ```bash
+   docker-compose up --build
+   ```
