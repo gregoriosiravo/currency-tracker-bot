@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   node:
@@ -12,9 +12,7 @@ services:
       - MONGODB_URI=mongodb://mongodb:27017/CurrencyCheckerBot
     depends_on:
       - mongodb
-    volumes:
-      - .:/app
-      - /app/node_modules
+    restart: always
 
   mongodb:
     image: mongo
@@ -28,6 +26,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    restart: always
 
 volumes:
   mongodb_data:

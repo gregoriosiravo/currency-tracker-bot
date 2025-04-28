@@ -17,7 +17,7 @@ const startApp = async () => {
       "❌ Errore nell'avvio del bot o nella connessione al database:",
       error
     );
-    process.exit(1); // Termina l'app se la connessione fallisce
+    process.exit(1); 
   }
 };
 

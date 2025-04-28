@@ -5,6 +5,7 @@ import { callbackQueryHandler } from "./handlers/callbackQueryHandler";
 import { handleGoalInput } from "./handlers/updateGoalHandler";
 import dotenv from "dotenv";
 import { monitorCurrencyRates } from "../services/monitorCurrency";
+import { scheduleDailyMonitoring } from "../services/dailyRun";
 
 dotenv.config();
 
@@ -13,11 +14,9 @@ export const startBot = () => {
     polling: true,
   });
 
-  // Register commands
   startCommand(bot);
   optionCommand(bot);
 
-  // Register handlers
   callbackQueryHandler(bot);
 
   bot.on("message", async (msg) => {
@@ -28,7 +27,7 @@ export const startBot = () => {
 
     await handleGoalInput(chatId, text, bot);
   });
-
+  scheduleDailyMonitoring(bot);
   setInterval(async () => {
     await monitorCurrencyRates(bot);
   }, 10 * 60 * 1000);
